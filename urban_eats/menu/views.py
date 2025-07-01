@@ -1,10 +1,11 @@
 # menu/views.py
 
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Category, Dish, Order
-from .serializers import CategorySerializer, DishSerializer, OrderSerializer, RegisterSerializer
+from .serializers import (CategorySerializer, DishSerializer, OrderSerializer,
+                          RegisterSerializer)
 
 
 class CategoryListView(generics.ListAPIView):

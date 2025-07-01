@@ -1,9 +1,11 @@
 # menu/urls.py
 
 from django.urls import path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
-from .views import CategoryListView, DishListView, OrderCreateView, RegisterView
+from .views import (CategoryListView, DishListView, OrderCreateView,
+                    RegisterView)
 
 urlpatterns = [
     path('categories/', CategoryListView.as_view(), name='category-list'),

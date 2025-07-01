@@ -1,6 +1,7 @@
 # menu/admin.py
 
 from django.contrib import admin
+
 from .models import Category, Dish, Order
 
 admin.site.register(Category)
