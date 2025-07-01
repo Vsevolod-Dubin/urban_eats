@@ -4,8 +4,12 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Category, Dish, Order
-from .serializers import (CategorySerializer, DishSerializer, OrderSerializer,
-                          RegisterSerializer)
+from .serializers import (
+    CategorySerializer,
+    DishSerializer,
+    OrderSerializer,
+    RegisterSerializer,
+)
 
 
 class CategoryListView(generics.ListAPIView):
@@ -14,7 +18,7 @@ class CategoryListView(generics.ListAPIView):
 
 
 class DishListView(generics.ListAPIView):
-    queryset = Dish.objects.select_related('category').all()
+    queryset = Dish.objects.select_related("category").all()
     serializer_class = DishSerializer
 
 

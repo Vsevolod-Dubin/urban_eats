@@ -70,7 +70,9 @@ class Migration(migrations.Migration):
                 ("is_paid", models.BooleanField(default=False)),
                 (
                     "dishes",
-                    models.ManyToManyField(related_name="orders", to="menu.dish"),
+                    models.ManyToManyField(
+                        related_name="orders", to="menu.dish"
+                    ),
                 ),
                 (
                     "user",
