@@ -52,6 +52,26 @@ Supervisor, Nginx and migration status from terminal:
 
 ---
 
+## ✅ Pytest Test Coverage
+
+The project includes basic API test coverage using `pytest` and `pytest-django`.
+
+### Tested functionality:
+
+- ✅ Public access to `/api/categories/`
+- ✅ Unauthorized access to `/api/orders/` is blocked
+- ✅ Authorized users can create valid orders
+- ✅ Invalid dish IDs are properly rejected
+
+### To run tests locally:
+
+```bash
+cd urban_eats/urban_eats
+source env/bin/activate
+pytest
+
+---
+
 ## 🧪 API Access (Demo)
 
 - 🌐 **Base URL:** http://139.59.98.98/
