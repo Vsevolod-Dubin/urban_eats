@@ -29,26 +29,26 @@ It is deployed on a live server and designed to simulate a real-world food deliv
 
 ## 📂 Project Structure
 
-![VS Code Structure](screenshots/vs_code_structure.png)
+![VS Code Structure](screenshots/6_vs_code_structure.png)
 
 ---
 
 ## 📸 Screenshots
 
 ### API `/api/categories/`
-![API Categories](screenshots/api_categories.png)
+![API Categories](screenshots/2_api_categories.png)
 
 ### Django Admin Interface
 - Main admin dashboard
-  ![Admin Main](screenshots/admin_main.png)
+  ![Admin Main](screenshots/3_admin_main.png)
 - Dishes section
-  ![Admin Dishes](screenshots/admin_dishs.png)
+  ![Admin Dishes](screenshots/4_admin_dishs.png)
 - Orders management
   ![Orders](screenshots/5_orders.png)
 
 ### Deployment Status
 Supervisor, Nginx and migration status from terminal:
-![Deploy Status](screenshots/deploy_status.png)
+![Deploy Status](screenshots/7_deploy_status.png)
 
 ---
 
