@@ -1,0 +1,7 @@
+2 api_categories - Пример ручки API /api/categories/ с тестовыми данными.
+
+3 admin_main, 4 admin_dishs, 5_orders - Интерфейс Django Admin: добавление категории, управление блюдами и пользователями
+
+6 vs_code_structure - Структура проекта
+
+7 deploy_status - Пример запуска миграций, настройки Supervisor и проверки nginx.
