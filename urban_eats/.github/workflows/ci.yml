@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_USER: urban_user
+          POSTGRES_PASSWORD: urban_pass
+          POSTGRES_DB: urban_eats
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DJANGO_SETTINGS_MODULE: core.settings
+      POSTGRES_DB: urban_eats
+      POSTGRES_USER: urban_user
+      POSTGRES_PASSWORD: urban_pass
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run migrations
+      run: |
+        python manage.py migrate
+
+    - name: Run tests
+      run: |
+        pytest
+
+    - name: Check code style with flake8
+      run: |
+        flake8 .
