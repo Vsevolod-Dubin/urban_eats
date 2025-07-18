@@ -2,7 +2,7 @@
 
 UrbanEats is a portfolio-level REST API project for managing food delivery menus and orders. Built with Django and PostgreSQL, containerized using Docker, and deployed to a VPS with Nginx + Gunicorn + HTTPS via Let's Encrypt.
 
-🌐 Live demo: [https://ueats.info](https://ueats.info)
+🌐 Live demo (admin panel): [https://ueats.info/admin/](https://ueats.info/admin/)
 
 ---
 
@@ -31,7 +31,7 @@ UrbanEats is a portfolio-level REST API project for managing food delivery menus
 ## Admin Access
 
 - Admin Panel: [https://ueats.info/admin/](https://ueats.info/admin/)
-- Superuser: `vcevolod / admin12345`
+- Demouser: `demo_user / demo12345`
 
 ---
 
@@ -94,7 +94,7 @@ Before moving to Docker, this project was also deployed manually to the same VPS
 
 **UrbanEats** — это полноценный API-проект с авторизацией, административной панелью и хранением заказов. Реализован на Django, использует PostgreSQL, упакован в Docker и развернут на удалённом сервере (VPS) с поддержкой HTTPS.
 
-🌐 Демо: [https://ueats.info](https://ueats.info)
+🌐 Демо: [https://ueats.info/admin/](https://ueats.info/admin/)
 
 ---
 
@@ -123,7 +123,7 @@ Before moving to Docker, this project was also deployed manually to the same VPS
 ## Доступ в админку
 
 - URL: [https://ueats.info/admin/](https://ueats.info/admin/)
-- Пользователь: `vcevolod / admin12345`
+- Пользователь: `demo_user / demo12345`
 
 ---
 
