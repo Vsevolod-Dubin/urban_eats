@@ -19,3 +19,4 @@ svgwrite==1.4.3
 Tree==0.2.4
 tzdata==2025.2
 gunicorn==21.2.0
+flake8==7.0.0
