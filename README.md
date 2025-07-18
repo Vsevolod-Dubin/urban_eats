@@ -1,120 +1,164 @@
-# UrbanEats 🍽️
+# UrbanEats — Food Delivery Menu API (Dockerized)
 
-UrbanEats is a backend API project developed as part of a self-driven portfolio to showcase real-world experience with Django, PostgreSQL, and production deployment on a VPS.  
-It is deployed on a live server and designed to simulate a real-world food delivery backend system.
+UrbanEats is a portfolio-level REST API project for managing food delivery menus and orders. Built with Django and PostgreSQL, containerized using Docker, and deployed to a VPS with Nginx + Gunicorn + HTTPS via Let's Encrypt.
+
+🌐 Live demo: [https://ueats.info](https://ueats.info)
 
 ---
 
-## 🚀 Features
+## Features
 
-- View food menu categories and dishes
-- Place orders via API
+- View menu categories and dishes
+- Place and manage orders via API
+- Django admin panel
 - JWT authorization
-- Django Admin panel
-- Manual deployment to a VPS (Ubuntu) with Gunicorn + Supervisor + Nginx
+- PostgreSQL as production database
+- Static file serving via Nginx
+- HTTPS enabled with Certbot
+- Dockerized for easy deployment
 
 ---
 
-## 🔧 Tech Stack
+## API Endpoints
 
-- **Backend:** Django + Django REST Framework
-- **Database:** PostgreSQL
-- **Web server:** Nginx
-- **Application server:** Gunicorn
-- **Process control:** Supervisor
-- **OS:** Ubuntu 22.04 (on DigitalOcean VPS)
-- **Python venv**
+- `GET /api/categories/` — list of categories
+- `GET /api/dishes/` — list of dishes
+- `POST /api/orders/` — create order
+- `GET /api/orders/` — list user orders *(auth required)*
 
 ---
 
-## 📂 Project Structure
+## Admin Access
 
-![VS Code Structure](screenshots/6_vs_code_structure.png)
-
----
-
-## 📸 Screenshots
-
-### API `/api/categories/`
-![API Categories](screenshots/2_api_categories.png)
-
-### Django Admin Interface
-- Main admin dashboard
-  ![Admin Main](screenshots/3_admin_main.png)
-- Dishes section
-  ![Admin Dishes](screenshots/4_admin_dishs.png)
-- Orders management
-  ![Orders](screenshots/5_orders.png)
-
-### Deployment Status
-Supervisor, Nginx and migration status from terminal:
-![Deploy Status](screenshots/7_deploy_status.png)
+- Admin Panel: [https://ueats.info/admin/](https://ueats.info/admin/)
+- Superuser: `vcevolod / admin12345`
 
 ---
 
-## ✅ Pytest Test Coverage
+## Deployment Stack
 
-The project includes basic API test coverage using `pytest` and `pytest-django`.
+- **Backend:** Django + DRF
+- **Database:** PostgreSQL (in Docker volume)
+- **Server:** VPS (Ubuntu 22.04)
+- **App Server:** Gunicorn
+- **Proxy:** Nginx
+- **SSL:** Let's Encrypt via Certbot
+- **Containers:** Docker Compose (web, db, nginx, certbot)
 
-### Tested functionality:
+---
 
-- ✅ Public access to `/api/categories/`
-- ✅ Unauthorized access to `/api/orders/` is blocked
-- ✅ Authorized users can create valid orders
-- ✅ Invalid dish IDs are properly rejected
+## Screenshots
 
-### To run tests locally:
+| Screenshot | Description |
+|-----------|-------------|
+| ![2_api_categories](screenshots/2_api_categories.png) | Public API `/api/categories/` |
+| ![3_admin_main](screenshots/3_admin_main.png) | Django Admin panel |
+| ![4_admin_dishs](screenshots/4_admin_dishs.png) | Dish list in Admin |
+| ![5_orders](screenshots/5_orders.png) | Order edit page |
+| ![6_vs_code_structure](screenshots/6_vs_code_structure.png) | VS Code project structure |
+| ![8_active_containers_list](screenshots/8_active_containers_list.png) | `docker compose ps` |
+| ![9_certbot_success](screenshots/9_certbot_success.png) | Certbot certificate success |
+| ![10_https_check_curl](screenshots/10_https_check_curl.png) | `curl -I https://ueats.info` |
+
+---
+
+## Run Locally with Docker
 
 ```bash
-cd urban_eats/urban_eats
-source env/bin/activate
-pytest
+git clone https://github.com/yourusername/urban_eats.git
+cd urban_eats
+cp .env.example .env  # or create your own .env file
 
----
+# Build and run the containers
+docker compose up -d --build
 
-## 🧪 API Access (Demo)
+# Run Certbot manually once (for HTTPS)
+docker compose run --rm certbot
 
-- 🌐 **Base URL:** http://139.59.98.98/
-- 🔐 **Admin Panel:** http://139.59.98.98/admin/
-
-_(Temporary access for portfolio review only)_
-
----
-
-## 🛠️ Local Installation
-
-```bash
-git clone https://github.com/Vsevolod-Dubin/urban_eats.git
-cd urban_eats/urban_eats
-python3 -m venv env
-source env/bin/activate
-pip install -r ../requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
+# View logs if needed
+docker compose logs -f web
 ```
 
 ---
 
-## 🔐 Deployment Summary (Manual VPS)
+## Notes
 
-1. Create user `ubuntu` and secure SSH access
-2. Install Python 3.10+, PostgreSQL, pip, venv
-3. Clone project and create virtual environment
-4. Install dependencies and apply migrations
-5. Configure Gunicorn and Supervisor
-6. Configure Nginx to proxy requests to Gunicorn
-7. Collect static files with `python manage.py collectstatic`
+Before moving to Docker, this project was also deployed manually to the same VPS using virtualenv + Gunicorn + Nginx + PostgreSQL installed directly on the system. This showcases experience with both traditional and containerized deployment methods.
 
 ---
 
-## 🧾 Author
+<details>
+<summary><strong>🇷🇺 Нажмите, чтобы прочитать описание на русском</strong></summary>
 
-This project was created independently to demonstrate hands-on backend and DevOps skills.  
-It runs on a production-like server with a real database, static files, process management, and API endpoints.
+# UrbanEats — API Меню доставки еды (Docker + VPS)
+
+**UrbanEats** — это полноценный API-проект с авторизацией, административной панелью и хранением заказов. Реализован на Django, использует PostgreSQL, упакован в Docker и развернут на удалённом сервере (VPS) с поддержкой HTTPS.
+
+🌐 Демо: [https://ueats.info](https://ueats.info)
 
 ---
 
-## 📄 License
+## Функциональность
 
-MIT License (or your preferred license)
+- Просмотр меню и категорий
+- Создание заказов через API
+- Авторизация по токену
+- Панель администратора Django
+- Продвинутая база — PostgreSQL
+- Docker и `docker-compose`
+- Nginx + Gunicorn
+- HTTPS (Let's Encrypt Certbot)
+
+---
+
+## Примеры API
+
+- `GET /api/categories/` — список категорий
+- `GET /api/dishes/` — список блюд
+- `POST /api/orders/` — создать заказ
+- `GET /api/orders/` — список заказов пользователя (требует авторизации)
+
+---
+
+## Доступ в админку
+
+- URL: [https://ueats.info/admin/](https://ueats.info/admin/)
+- Пользователь: `vcevolod / admin12345`
+
+---
+
+## Технологический стек
+
+- **Язык:** Python + Django REST Framework
+- **БД:** PostgreSQL (в Docker-томе)
+- **Сервер:** VPS (Ubuntu)
+- **Gunicorn + Nginx**
+- **HTTPS:** Certbot / Let's Encrypt
+- **Dockerized:** через Docker Compose
+
+---
+
+## Скриншоты
+
+(см. английскую версию выше)
+
+---
+
+## Запуск локально (Docker)
+
+```bash
+git clone https://github.com/yourusername/urban_eats.git
+cd urban_eats
+cp .env.example .env
+
+docker compose up -d --build
+docker compose run --rm certbot
+```
+
+---
+
+## Дополнительно
+
+До перехода на Docker, этот проект был развёрнут вручную на том же VPS: установка Python, PostgreSQL, настройка Gunicorn + Nginx + systemd. Это показывает владение как ручным, так и контейнерным деплоем.
+
+</details>
