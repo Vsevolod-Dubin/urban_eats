@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file: .env
+    restart: unless-stopped
+
+  web:
+    build: .
+    command: sh ./entrypoint.sh
+    volumes:
+      - .:/app
+      - static_volume:/app/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file: .env
+    restart: unless-stopped
+    environment:
+      - DJANGO_SETTINGS_MODULE=urban_eats.settings
+      - PYTHONPATH=/app/urban_eats
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./data/certbot/www:/var/www/certbot
+      - static_volume:/static/
+    depends_on:
+      - web
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: >
+      sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot --email vcevolodstarpro@gmail.com --agree-tos --no-eff-email -d ueats.info -d www.ueats.info"
+volumes:
+  postgres_data:
+  static_volume:
